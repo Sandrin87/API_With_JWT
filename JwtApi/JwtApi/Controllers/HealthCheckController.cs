@@ -1,24 +1,19 @@
-﻿using JwtApi.Models;
-using Microsoft.AspNetCore.Authorization;
+﻿using JwtApi.Service.Interfaces;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.IdentityModel.Tokens;
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
-using System.Text;
-
 namespace JwtApi.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("[controller]/[action]")]
     public class HealthCheckController : Controller
     {
         IConfiguration _configuration;
+        ITokenService _tokenService;
 
-        public HealthCheckController(IConfiguration configuration)
+        public HealthCheckController(IConfiguration configuration, ITokenService tokenService)
         {
             _configuration = configuration;            
+            _tokenService = tokenService;
         }
-
 
         [HttpGet]
         public IActionResult HealthcheckAuthorization()
